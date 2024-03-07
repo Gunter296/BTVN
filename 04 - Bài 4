@@ -1,0 +1,34 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<sstream>
+
+using namespace std;
+
+int main()
+{
+    int n, q;
+    cin >> n >> q;
+    cin.ignore();
+    vector<vector<int>> arr;
+    for(int a=0; a<n; a++)
+    {
+        vector<int> b;
+        string s;
+        getline(cin, s);
+        stringstream ss(s);
+        int temp;
+        while(ss>>temp){
+            b.push_back(temp);
+        }
+        arr.push_back(b);
+        b.clear();
+    }
+    int x,y;
+    for(int i=0; i<q; i++)
+    {
+        cin >> x >> y;
+        cout << arr[x][y+1]  << endl;
+    }
+    return 0;
+}
