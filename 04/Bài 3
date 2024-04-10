@@ -2,37 +2,37 @@
 
 using namespace std;
 
-string ltrim(const string &);
-string rtrim(const string &);
+bool isPalindrome(string s)
+{
+    unsigned int i = 0, j = s.length() - 1;
+    while(i < j)
+    {
+        if(s[i] != s[j]) break;
+        ++i;
+        --j;
+    }
+    return i >= j;
+}
 
-/*
- * Complete the 'palindromeIndex' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts STRING s as parameter.
- */
+int checkAfter(string& s, int i, int j)
+{
+    string tmp = s;
+    tmp.erase(i, 1);
+    if(isPalindrome(tmp) ) return i;
+    s.erase(j, 1);
+    if(isPalindrome(s) ) return j;
+    return -1;
+}
 
 int palindromeIndex(string s) {
-    int n = (int)s.size();
+    int n = (int)s.length();
     if(n==1) return -1;
-    int i=0, j=n-1, temp=1, res=-1;
-    while(i < n/2)
+    int i=0, j=n-1, res;
+    while(i < j)
     {
-        if(s[i]!=s[j] && temp==1)
+        if(s[i]!=s[j])
         {
-            if(s[i+1]==s[j]){
-                res=i;
-                i+=temp;
-                temp=0;
-            }
-            else if(s[j-1]==s[i]){
-                res = j;
-                j-=temp;
-                temp=0;
-            }
-        }
-        if(s[i]!=s[j] && temp!=1)
-        {
+            res = checkAfter(s, i, j);
             break;
         }
         i++;
@@ -43,45 +43,17 @@ int palindromeIndex(string s) {
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
-
-    string q_temp;
-    getline(cin, q_temp);
-
-    int q = stoi(ltrim(rtrim(q_temp)));
-
-    for (int q_itr = 0; q_itr < q; q_itr++) {
-        string s;
-        getline(cin, s);
-
-        int result = palindromeIndex(s);
-
-        fout << result << "\n";
+    int n;
+    cin >> n;
+    string s;
+    
+    while(n--)
+    {
+        cin >> s;
+        cout << palindromeIndex(s) << endl;
     }
-
-    fout.close();
 
     return 0;
 }
 
-string ltrim(const string &str) {
-    string s(str);
 
-    s.erase(
-        s.begin(),
-        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
-    );
-
-    return s;
-}
-
-string rtrim(const string &str) {
-    string s(str);
-
-    s.erase(
-        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
-        s.end()
-    );
-
-    return s;
-}
