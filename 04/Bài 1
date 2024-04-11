@@ -19,7 +19,7 @@ int pageCount(int n, int p) {
     bool stop = false;
     if(n%2==0)
     {
-        if( (p-1)<(n-p+1) )
+        if( (p-1)<(n-p) )
         {
             pageToBegin=1;
             if(pageToBegin!=p){
