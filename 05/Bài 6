@@ -1,0 +1,41 @@
+#include <iostream>
+#include <map>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    map<string, int> sheets;
+    int q;
+    cin >> q;
+    for(int i=0; i<q; i++)
+    {
+        int type, y, tempVal;
+        string x;
+        cin >> type >> x;
+        switch(type)
+        {
+            case 1:
+                cin >> y;
+                if(!sheets.count(x))
+                    {
+                        sheets.insert( {x , y});
+                    }
+                else{
+                    tempVal = sheets[x] + y;
+                    sheets.erase(x);
+                    sheets.insert( {x, tempVal});
+                }
+                break;
+            case 2:
+                sheets.erase(x);
+                sheets.insert( {x, 0});
+                break;
+            case 3:
+                cout << sheets[x] << endl;
+                break;
+        }
+    }
+    return 0;
+}
