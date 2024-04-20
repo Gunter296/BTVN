@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+struct Student
+{
+    int age, Class;
+    string firstName, lastName;
+    void getInfor()
+    {
+        cin >> age >> firstName >> lastName >> Class;
+    }
+    void display()
+    {
+        cout << age << " " << firstName << " " << lastName << " " << Class;
+    }
+};
+
+int main()
+{
+    Student sb;
+    sb.getInfor();
+    sb.display();
+    return 0;
+}
